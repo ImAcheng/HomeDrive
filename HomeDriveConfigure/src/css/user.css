@@ -1,0 +1,164 @@
+.user-manager {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 650;
+}
+
+.page-header p {
+    margin: 6px 0 0;
+    opacity: 0.65;
+}
+
+
+/* Card */
+
+.manager-card {
+    padding: 24px;
+
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    border-radius: 12px;
+
+    background: rgba(128, 128, 128, 0.06);
+}
+
+.card-header {
+    margin-bottom: 24px;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card-header p {
+    margin: 5px 0 0;
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+
+/* Form */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 7px;
+
+    outline: none;
+
+    font: inherit;
+
+    background: transparent;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.form-group input:focus {
+    border-color: currentColor;
+
+    box-shadow:
+        0 0 0 2px rgba(128, 128, 128, 0.12);
+}
+
+.form-group input::placeholder {
+    opacity: 0.45;
+}
+
+
+/* Actions */
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 24px;
+}
+
+.button {
+    padding: 9px 16px;
+
+    border: 0;
+    border-radius: 7px;
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        opacity 0.15s ease,
+        transform 0.1s ease;
+}
+
+.button:hover {
+    opacity: 0.85;
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button.primary {
+    background: #0078d4;
+    color: white;
+}
+
+
+/* Message */
+
+.message {
+    margin-top: 18px;
+    padding: 10px 12px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    background: rgba(128, 128, 128, 0.08);
+}
+
+.message.success {
+    background: rgba(46, 160, 67, 0.12);
+    color: #2ea043;
+}
+
+.message.error {
+    background: rgba(207, 34, 46, 0.12);
+    color: #cf222e;
+}

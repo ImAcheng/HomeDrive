@@ -1,0 +1,12 @@
+.button.return {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    background-color: black;
+    color: white;
+    height: 40px;
+    width: 80px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+}

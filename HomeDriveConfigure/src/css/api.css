@@ -1,0 +1,77 @@
+.api-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 16px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+
+.api-name {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.api-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.api-path {
+    margin-top: 4px;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+.api-status {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.api-status.running {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+
+.api-status.stopped {
+    background: #f5f5f5;
+    color: #777;
+}
+
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #999;
+}
+
+
+.api-status.running .status-dot {
+    background: #2e7d32;
+}

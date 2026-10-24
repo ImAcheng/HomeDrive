@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self';"
+    >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HomeDrive Configuration Manager</title>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/sub.css">
+</head>
+
+<body>
+    <button id="btn-return" class="button return">
+        Return
+    </button>
+    
+    <main class="container">
+
+        <header>
+            <h1>HomeDrive</h1>
+            <p>Configure</p>
+        </header>
+
+        <section class="card">
+
+            <h2>Database</h2>
+
+            <div class="form-group">
+                <label for="server">SQL Server</label>
+                <input
+                    id="server"
+                    type="text"
+                    placeholder="localhost"
+                    value="localhost"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    id="username"
+                    type="text"
+                    placeholder="sa"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                >
+            </div>
+
+            <div class="actions">
+
+                <button id="btn-connect" class="button secondary">
+                    Test Connection
+                </button>
+
+                <button id="btn-create" class="button primary">
+                    Create Database
+                </button>
+
+            </div>
+
+            <div id="status" class="status hidden"></div>
+
+        </section>
+
+    </main>
+
+    <script src="renderer/dbRenderer.js"></script>
+
+</body>
+
+</html>

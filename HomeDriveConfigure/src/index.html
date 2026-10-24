@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self';"
+    >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HomeDrive Configure</title>
+
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <main class="container">
+
+        <header>
+            <h1>HomeDrive Configuration Manager</h1>
+            <p>Configure backend settings.</p>
+        </header>
+
+        <div class="card">
+            <h2>Database</h2>
+            <p>Create and test database</p>
+
+            <div class="actions">
+                <button class="button primary" data-page="dbManager.html">
+                    Open
+                </button>
+            </div>
+        </div>
+        
+        <br>
+
+        <div class="card">
+            <h2>API</h2>
+            <p>Manage and launch API</p>
+
+            <div class="actions">
+                <button class="button primary" data-page="apiManager.html">
+                    Open
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <h2>User Manager</h2>
+            <p>Create and manage users</p>
+
+            <div class="actions">
+                <button class="button primary" data-page="userManager.html">
+                    Open
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <h2>About</h2>
+            <p>Something about HomeDrive</p>
+
+            <div class="actions">
+                <button class="button primary" data-page="about">
+                    Open
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="renderer/indexRenderer.js"></script>
+</body>
+</html>

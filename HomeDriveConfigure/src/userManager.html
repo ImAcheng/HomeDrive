@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Manager</title>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="css/sub.css">
+</head>
+
+<body>
+    <button id="btn-return" class="button return">
+        Return
+    </button>
+
+    <main class="user-manager">
+
+        <header class="page-header">
+            <div>
+                <h1>User Manager</h1>
+                <p>Create a new HomeDrive account</p>
+            </div>
+        </header>
+
+
+        <section class="manager-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Create Account</h2>
+                    <p>Enter the account information below.</p>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    maxlength="63"
+                    placeholder="Enter username"
+                    autocomplete="off"
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    maxlength="511"
+                    placeholder="Enter password"
+                    autocomplete="new-password"
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    id="confirmPassword"
+                    type="password"
+                    maxlength="511"
+                    placeholder="Enter password again"
+                    autocomplete="new-password"
+                >
+            </div>
+
+
+            <div
+                id="createMessage"
+                class="message"
+                hidden
+            ></div>
+
+
+            <div class="card-actions">
+                <button
+                    id="createAccount"
+                    class="button primary"
+                >
+                    Create Account
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="renderer/userRenderer.js"></script>
+</body>
+</html>

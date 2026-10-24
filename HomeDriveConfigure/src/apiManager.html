@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>API Manager</title>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/api.css">
+    <link rel="stylesheet" href="css/sub.css">
+</head>
+
+<body>
+    <button id="btn-return" class="button return">
+        Return
+    </button>
+
+    <div class="container">
+
+        <header>
+            <h1>API Manager</h1>
+            <p>Manage API service</p>
+        </header>
+
+
+        <div class="card">
+
+            <h2>API</h2>
+
+            <div class="api-info">
+
+                <div class="api-name">
+                    <span class="api-title">API Service</span>
+                    <span class="api-path">
+                        api_program/api.exe
+                    </span>
+                </div>
+
+                <div
+                    id="apiStatus"
+                    class="api-status stopped"
+                >
+                    <span class="status-dot"></span>
+                    <span id="apiStatusText">
+                        Not Running
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    id="apiButton"
+                    class="button primary"
+                >
+                    Lauch API
+                </button>
+
+            </div>
+
+
+            <div
+                id="message"
+                class="status hidden"
+            ></div>
+
+        </div>
+
+    </div>
+
+    <script src="renderer/apiRenderer.js"></script>
+
+</body>
+
+</html>
