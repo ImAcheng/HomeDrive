@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="AntdUI" Version="2.4.9" />
+    <PackageReference Include="Polly" Version="8.8.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

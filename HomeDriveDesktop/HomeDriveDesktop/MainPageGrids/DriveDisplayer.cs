@@ -73,8 +73,8 @@ namespace HomeDriveDesktop.MainPageGrids {
         #endregion
 
         private async void btnUploadFile_Click(object sender, EventArgs e) {
-            await FileAPI.UploadFile(CurrentDirId);
-            await _LoadAndPutFiles(CurrentDirId);
+            if (await FileAPI.UploadFile(CurrentDirId))
+                await _LoadAndPutFiles(CurrentDirId);
         }
 
         private async void btnCreateDir_Click(object sender, EventArgs e) {

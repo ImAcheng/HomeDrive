@@ -10,12 +10,12 @@ namespace HomeDriveDesktop {
         private List<string> _ConnHistory;
 
         private void FormConnect_Load(object sender, EventArgs e) {
-            if (Path.Exists(_ConnPropPath))
+            if (Path.Exists(_ConnPropPath)) {
                 _ConnHistory = File.ReadAllLines(_ConnPropPath).ToList();
+                lsHistory.Items.AddRange(_ConnHistory.ToArray());
+            }
             else
                 File.Create(_ConnPropPath).Close();
-
-            lsHistory.Items.AddRange(_ConnHistory.ToArray());
         }
 
         private async void btnConnect_Click(object sender, EventArgs e) {

@@ -15,8 +15,16 @@ string connStr = sr.ReadToEnd().Trim();
 
 var builder = WebApplication.CreateBuilder(args);
 
+const long MaxFileSize = 10L * 1024 * 1024 * 1024;
+
+builder.WebHost.ConfigureKestrel(options => {
+    options.Limits.MaxRequestBodySize =
+        MaxFileSize + 1024 * 1024;
+});
+
 builder.Services.Configure<FormOptions>(options => {
-    options.MultipartBodyLengthLimit = 10L * 1024 * 1024 * 1024; // 10 GB
+    options.MultipartBodyLengthLimit =
+        MaxFileSize + 1024 * 1024;
 });
 
 // Add services to the container.

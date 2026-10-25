@@ -11,7 +11,7 @@ namespace HomeDriveDesktop {
         public static LoginPage? loginPage;
         private static MainPage? mainPage;
 
-        public static HttpClient ApiClient = new HttpClient();
+        public static HttpClient ApiClient = new HttpClient() { Timeout = TimeSpan.FromHours(2) };
         public static Account? LoggedAccount;
 
         private void FormMain_Load(object sender, EventArgs e) {

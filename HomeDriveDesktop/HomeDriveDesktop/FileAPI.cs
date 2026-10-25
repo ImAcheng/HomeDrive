@@ -1,11 +1,12 @@
 ﻿using AntdUI;
 using HomeDriveDesktop.DataModel;
 using HomeDriveDesktop.MainPageGrids;
+using Polly;
 using System.Diagnostics;
 using System.Net.Http.Json;
 
 namespace HomeDriveDesktop {
-    internal class FileAPI {
+    public static class FileAPI {
         public static async Task<List<FileDirData>> GetFileDirFrom(Guid? parentId = null) {
             try {
                 var resp = await FormMain.ApiClient.PostAsJsonAsync($"api/filedir/get-files",
@@ -23,28 +24,61 @@ namespace HomeDriveDesktop {
             }
         }
 
-        public static async Task UploadFile(Guid? parentId) {
-            using var ofd = new OpenFileDialog();
+        /// <summary>
+        /// Select files and upload them one by one (to prevent one failed all failed problem).
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        public static async Task<bool> UploadFile(Guid? parentId) {
+            if (AccountAPI.IsNull()) return false;
 
-            if (ofd.ShowDialog() != DialogResult.OK) return;
+            using var ofd = new OpenFileDialog() {
+                Multiselect = true
+            };
 
+            if (ofd.ShowDialog() != DialogResult.OK) return false;
+
+            var filePaths = ofd.FileNames;
+
+            bool atLeastOneFileWasUploaded = false;
+            foreach (string fp in filePaths) {
+                var policy = await Policy.Handle<HttpRequestException>()
+                .OrResult<bool>(rs => !rs)
+                .RetryAsync(3, (ex, rc) => {
+                    Notification.close_all();
+                    Notification.warn(FormMain.Instance, "Home Drive",
+                        $"Retrying to upload\n{fp}.", autoClose: 2);
+                })
+                .ExecuteAndCaptureAsync(() => _UploadToServer(parentId, fp));
+
+                if (policy.Outcome == OutcomeType.Failure) {
+                    Notification.close_all();
+                    Notification.error(FormMain.Instance, "Home Drive", $"Sorrry, but we can't upload\n{fp}", autoClose:2);
+                }
+                else {
+                    atLeastOneFileWasUploaded = true;
+                }
+            }
+
+            return atLeastOneFileWasUploaded;
+        }
+
+        private static async Task<bool> _UploadToServer(Guid? parentId, string fp) {
             using var form = new MultipartFormDataContent();
 
-            string fp = ofd.FileName;
-
-            using var fileStream = File.OpenRead(fp);
-            using var fileContent = new StreamContent(fileStream);
-            form.Add(fileContent, "file", Path.GetFileName(fp));
+            using var fileStream = new FileStream(fp, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 8192, useAsync: true);
+            using var content = new StreamContent(fileStream);
+            form.Add(content, "file", Path.GetFileName(fp));
 
             var resp = await FormMain.ApiClient.PostAsync(
                 $"api/filedir/upload-file/{FormMain.LoggedAccount.AccountId}/{parentId}",
                 form
             );
 
-            if (!resp.IsSuccessStatusCode) {
-                MessageBox.Show($"Failed to upload file(s).\nReason: {await resp.Content.ReadAsStringAsync()}");
-                return;
-            }
+            // this should be empty if it was success
+            Debug.WriteLine($"[Debug] {await resp.Content.ReadAsStringAsync()}");
+
+            return resp.IsSuccessStatusCode;
         }
 
         public static async Task DeleteFileOrDir(Guid targetId) {
