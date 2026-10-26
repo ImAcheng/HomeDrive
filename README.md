@@ -6,6 +6,10 @@ This project is *almost* finished, which means there are still sth need to make.
 Also, the user login password is **WEAK PASSWORD**, you can change the code if you care about security.  
 (I'll fix it later.)
 
+Although the configure app provides api server,  
+I still suggest you lauch the api program directly for debug information.  
+For users who use release package, you can check "ApiServer" folder.
+
 ## Frameworks
 * Database - Microsoft SQL Server 2025 Developer Edition
 * Configure Application - Electron
@@ -23,7 +27,7 @@ To get started, please follow the steps below:
 6. Create database in configure app.
 7. Setup connection string in HomeDriveConfigure/api_prgram/ConnProp.hddata.
 8. Create user account in configure app.
-9. Run API program.
+9. Run API program (run directly instead of running it from configure app is recommanded).
 10. Run main app. (Done)
 
 For those who don't know, MSSQL & configure app can run on Linux.

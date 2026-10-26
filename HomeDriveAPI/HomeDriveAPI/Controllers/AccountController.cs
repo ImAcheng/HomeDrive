@@ -28,7 +28,8 @@ namespace HomeDriveAPI.Controllers {
 
                 return Ok(new { success = true, message = "Success.", account = acc });
             }
-            catch {
+            catch (Exception ex) {
+                Console.WriteLine($"[Unexpected Error] {ex.Message}");
                 return BadRequest(new { success = false, message = "Database lost or unknown exception(s) occurred." });
             }
         }

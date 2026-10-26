@@ -6,7 +6,7 @@ out/
 bin/
 obj/
 .RELEASE/
-
+.STORAGE/
 
 Docs.docx
 Docs.pdf

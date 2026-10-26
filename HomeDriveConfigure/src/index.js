@@ -183,14 +183,14 @@ function getApiPath() {
             __dirname,
             "..",
             "api_program",
-            "api.exe"
+            "HomeDriveAPI.exe"
         );
     }
 
     return path.join(
         process.resourcesPath,
         "api_program",
-        "api.exe"
+        "HomeDriveAPI.exe"
     );
 }
 

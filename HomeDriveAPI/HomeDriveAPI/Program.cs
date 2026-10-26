@@ -6,12 +6,16 @@ using Microsoft.EntityFrameworkCore;
 const string ConnPropFile = "ConnProp.hddata";
 if (!File.Exists(ConnPropFile)) {
     Console.WriteLine($"Connection Properties File Lost. ({ConnPropFile})\n" +
-        $"Please use HomeDrive Configure to set up.");
+        $"Please use HomeDrive Configure to set up.\n\n" +
+        $"Press any key to end program...\n");
+
+    Console.ReadKey(true);
     return;
 }
 
 using var sr = new StreamReader(ConnPropFile);
 string connStr = sr.ReadToEnd().Trim();
+Console.WriteLine($"Successfully loaded database connection string:\n{connStr}");
 
 var builder = WebApplication.CreateBuilder(args);
 
