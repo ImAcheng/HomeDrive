@@ -39,24 +39,32 @@ namespace HomeDriveDesktop {
             if (ofd.ShowDialog() != DialogResult.OK) return false;
 
             var filePaths = ofd.FileNames;
-
             bool atLeastOneFileWasUploaded = false;
+
+            DriveDisplayer.Instance.UploadDisplay.Show();
+
             foreach (string fp in filePaths) {
+                var upb = new UploadProgressBar(fp);
+                DriveDisplayer.Instance.UploadDisplay.AddBar(upb);
+
                 var policy = await Policy.Handle<HttpRequestException>()
                 .OrResult<bool>(rs => !rs)
                 .RetryAsync(3, (ex, rc) => {
                     Notification.close_all();
                     Notification.warn(FormMain.Instance, "Home Drive",
                         $"Retrying to upload\n{fp}.", autoClose: 2);
+                    upb.SetStatusTo(TType.Warn, true);
                 })
                 .ExecuteAndCaptureAsync(() => _UploadToServer(parentId, fp));
 
                 if (policy.Outcome == OutcomeType.Failure) {
                     Notification.close_all();
                     Notification.error(FormMain.Instance, "Home Drive", $"Sorrry, but we can't upload\n{fp}", autoClose:2);
+                    upb.SetStatusTo(TType.Error, false);
                 }
                 else {
                     atLeastOneFileWasUploaded = true;
+                    upb.SetStatusTo(TType.Success, false);
                 }
             }
 

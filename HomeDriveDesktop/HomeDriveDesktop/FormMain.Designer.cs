@@ -54,8 +54,9 @@
             Controls.Add(pageHeader1);
             Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
+            MinimumSize = new Size(600, 500);
             Name = "FormMain";
-            Text = "FormMain";
+            Text = "Home Drive";
             Load += FormMain_Load;
             ResumeLayout(false);
         }

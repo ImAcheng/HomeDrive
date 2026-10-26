@@ -72,7 +72,12 @@ namespace HomeDriveDesktop.MainPageGrids {
         }
         #endregion
 
+        public UploadProgressDisplayer? UploadDisplay;
         private async void btnUploadFile_Click(object sender, EventArgs e) {
+            if (UploadDisplay == null) {
+                UploadDisplay = new UploadProgressDisplayer();
+            }
+
             if (await FileAPI.UploadFile(CurrentDirId))
                 await _LoadAndPutFiles(CurrentDirId);
         }
@@ -84,6 +89,8 @@ namespace HomeDriveDesktop.MainPageGrids {
 
         bool isShowingSearchResult = true;
         private async void btnShareFile_Click(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(input1.Text)) return;
+
             isShowingSearchResult = true;
 
             string keyword = input1.Text;

@@ -1,4 +1,5 @@
 ﻿using AntdUI;
+using HomeDriveDesktop.Helpers;
 
 namespace HomeDriveDesktop {
     public partial class LoginPage : UserControl {
@@ -33,12 +34,12 @@ namespace HomeDriveDesktop {
             // normally, result.Account is null shouldn't be null.
             // if it is, it's because I wrote a bad api.
             if (!(result?.Success ?? false) || result.Account == null) {
-                Notification.error(FormMain.Instance, "Home Drive", $"Login Failed: {result?.Message ?? "Unknow Error"}");
+                HDMsgBox.Show(FormMain.Instance, $"Login Failed: {result?.Message ?? "Unknow Error"}", TType.Error);
                 return;
             }
 
             FormMain.LoggedAccount = result.Account;
-            Notification.success(FormMain.Instance, "Home Drive", $"Welcome back, {result.Account.Username}");
+            HDMsgBox.Show(FormMain.Instance, $"Welcome back, {result.Account.Username}", TType.Success);
             FormMain.Instance.SetMainPage();
         }
     }

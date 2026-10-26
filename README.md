@@ -16,10 +16,15 @@ Also, the user login password is **WEAK PASSWORD**, you can change the code if y
 ## Setup Guide
 To get started, please follow the steps below:  
 1. Install MSSQL with default installation.
-2. Open SQL Server Configuration Manager and enable TPC/IP in SQL Server Network Configuration.
-3. Set port to 1433 in TCP/IP Properties.
-4. Create database in configure app.
-5. Run API program. (Done)  
+2. Remeber to setup your SQL System Admin account & password.
+3. Open SQL Server Configuration Manager and enable TPC/IP in SQL Server Network Configuration.
+4. Set port to 1433 in TCP/IP Properties.
+5. Open configure app.
+6. Create database in configure app.
+7. Setup connection string in HomeDriveConfigure/api_prgram/ConnProp.hddata.
+8. Create user account in configure app.
+9. Run API program.
+10. Run main app. (Done)
 
 For those who don't know, MSSQL & configure app can run on Linux.
 
@@ -27,6 +32,6 @@ For those who don't know, MSSQL & configure app can run on Linux.
 Only support Windows now. I planned to make it cross-platform in the future.
 
 ## Mobile Application
-It's just a plan (I will make it).
+Planned.
 
 &copy; 2026 Lonely Acheng. All rights. Reserved.

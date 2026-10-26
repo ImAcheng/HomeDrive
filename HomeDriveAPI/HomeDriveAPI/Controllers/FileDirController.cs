@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
 
 namespace HomeDriveAPI.Controllers {
     [Route("api/[controller]")]
@@ -171,7 +168,9 @@ namespace HomeDriveAPI.Controllers {
             var result = await _db.FileDirData
                 .AsNoTracking()
                 .Where(x => x.AccountId == uid &&
-                            x.FileDirName.Trim().ToLower().Contains(keyword.Trim().ToLower()) && 
+                            (string.IsNullOrWhiteSpace(keyword) ?
+                            x.ParentDirId == null && x.AccountId == uid :
+                            x.FileDirName.Trim().ToLower().Contains(keyword.Trim().ToLower())) && 
                             x.Status == 0)
                 .ToListAsync();
 

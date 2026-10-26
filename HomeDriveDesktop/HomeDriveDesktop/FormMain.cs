@@ -16,9 +16,12 @@ namespace HomeDriveDesktop {
 
         private void FormMain_Load(object sender, EventArgs e) {
             Instance = this;
-            this.Max();
+
             using var connForm = new FormConnect();
-            connForm.ShowDialog();
+            if (connForm.ShowDialog() != DialogResult.OK) {
+                Application.Exit();
+                return;
+            }
 
             loginPage = new LoginPage() {
                 Parent = panelMain,

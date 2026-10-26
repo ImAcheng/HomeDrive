@@ -32,7 +32,7 @@
             // 
             pageHeader1.Dock = DockStyle.Top;
             pageHeader1.Location = new Point(0, 0);
-            pageHeader1.Margin = new Padding(4, 4, 4, 4);
+            pageHeader1.Margin = new Padding(4);
             pageHeader1.MaximizeBox = false;
             pageHeader1.MinimizeBox = false;
             pageHeader1.Name = "pageHeader1";
@@ -68,9 +68,10 @@
             Controls.Add(tbInput);
             Controls.Add(pageHeader1);
             Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 4, 4, 4);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4);
             Name = "InputFormDialog";
-            Text = "InputFormDialog";
+            Resizable = false;
             ResumeLayout(false);
         }
 

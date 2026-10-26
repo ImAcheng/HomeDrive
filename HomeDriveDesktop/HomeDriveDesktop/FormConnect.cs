@@ -1,4 +1,5 @@
 ﻿using AntdUI;
+using HomeDriveDesktop.Helpers;
 
 namespace HomeDriveDesktop {
     public partial class FormConnect : Window {
@@ -23,27 +24,30 @@ namespace HomeDriveDesktop {
             btnConnect.Text = "Connecting...";
 
             string ip_port = _IpPreProcess(tbIpPort.Text);
-
             var crs = await _TestConnection(ip_port);
 
             btnConnect.Loading = false;
             btnConnect.Text = "Connect";
 
             if (!crs.Success) {
-                MessageBox.Show(crs.Message);
+                HDMsgBox.Show(this, crs.Message ?? string.Empty, TType.Error);
                 return;
             }
 
             // store data here
-            if (_ConnHistory.Any(x => x.Equals(ip_port)))
-                _ConnHistory.Remove(ip_port);
-            _ConnHistory.Insert(0, ip_port);
-            if (!File.Exists(_ConnPropPath))
-                File.Create(_ConnPropPath).Close();
-            File.WriteAllText(_ConnPropPath, string.Join("\n", _ConnHistory));
+            try {
+                if (_ConnHistory.Any(x => x.Equals(ip_port)))
+                    _ConnHistory.Remove(ip_port);
+                _ConnHistory.Insert(0, ip_port);
+                if (!File.Exists(_ConnPropPath))
+                    File.Create(_ConnPropPath).Close();
+                File.WriteAllText(_ConnPropPath, string.Join("\n", _ConnHistory));
 
-            FormMain.ApiClient.BaseAddress = new Uri($"http://{ip_port}");
-            Notification.success(FormMain.Instance, "Home Drive", "Connected!", autoClose: 3);
+                FormMain.ApiClient.BaseAddress = new Uri($"http://{ip_port}");
+                Notification.success(FormMain.Instance, "Home Drive", "Connected!", autoClose: 3);
+            }
+            catch { }
+
             DialogResult = DialogResult.OK;
         }
 
@@ -63,7 +67,7 @@ namespace HomeDriveDesktop {
                 return new ConnectResult() { Success = false, Message = "Oops, your ip address format is not correct." };
             }
             catch (Exception ex) {
-                return new ConnectResult() { Success = false, Message = $"Oops, we catched a problem: {ex.Message}" };
+                return new ConnectResult() { Success = false, Message = $"Oops, we catched a problem:\n{ex.Message}" };
             }
 
             return new ConnectResult() { Success = true };
