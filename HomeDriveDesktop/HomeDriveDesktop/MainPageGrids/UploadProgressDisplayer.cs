@@ -7,8 +7,6 @@ namespace HomeDriveDesktop.MainPageGrids {
         }
 
         private void UploadProgressDisplayer_Load(object sender, EventArgs e) {
-            this.TopMost = true;
-
             // set position to bottom-left of main window
             _SetPos();
 

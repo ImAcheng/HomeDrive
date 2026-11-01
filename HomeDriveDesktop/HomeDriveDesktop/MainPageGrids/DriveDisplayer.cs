@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -70,6 +71,26 @@ namespace HomeDriveDesktop.MainPageGrids {
 
             _fileActionForm.Show();
         }
+
+        private async Task _MakeSearch() {
+            if (string.IsNullOrWhiteSpace(input1.Text)) return;
+
+            isShowingSearchResult = true;
+
+            string keyword = input1.Text;
+
+            panelFiles.Controls.Clear();
+
+            var fileDirs = await FileAPI.SearchFiles(keyword);
+
+            if (fileDirs.Count == 0) return;
+
+            panelFiles.SuspendLayout();
+            fileDirs.ForEach(fd => {
+                panelFiles.Controls.Add(new FileDirDisplayer(fd) { Dock = DockStyle.Top });
+            });
+            panelFiles.ResumeLayout();
+        }
         #endregion
 
         public UploadProgressDisplayer? UploadDisplay;
@@ -89,23 +110,7 @@ namespace HomeDriveDesktop.MainPageGrids {
 
         bool isShowingSearchResult = true;
         private async void btnShareFile_Click(object sender, EventArgs e) {
-            if (string.IsNullOrWhiteSpace(input1.Text)) return;
-
-            isShowingSearchResult = true;
-
-            string keyword = input1.Text;
-
-            panelFiles.Controls.Clear();
-
-            var fileDirs = await FileAPI.SearchFiles(keyword);
-
-            if (fileDirs.Count == 0) return;
-
-            panelFiles.SuspendLayout();
-            fileDirs.ForEach(fd => {
-                panelFiles.Controls.Add(new FileDirDisplayer(fd) { Dock = DockStyle.Top });
-            });
-            panelFiles.ResumeLayout();
+            await _MakeSearch();
         }
 
         // the search input field
@@ -118,6 +123,11 @@ namespace HomeDriveDesktop.MainPageGrids {
 
         private async void btnPrev_Click(object sender, EventArgs e) {
             await GoPrevFolder();
+        }
+
+        private async void input1_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter)
+                await _MakeSearch();
         }
     }
 }

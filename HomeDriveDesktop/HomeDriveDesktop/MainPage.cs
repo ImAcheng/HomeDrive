@@ -14,6 +14,8 @@ namespace HomeDriveDesktop {
         }
 
         private void btnLogout_Click(object sender, EventArgs e) {
+            driveDisplayer.UploadDisplay?.Dispose();
+            driveDisplayer.Dispose();
             FormMain.Instance.SetLoginPage();
         }
     }

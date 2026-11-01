@@ -1,5 +1,7 @@
 ﻿using AntdUI;
 using HomeDriveDesktop.DataModel;
+using HomeDriveDesktop.MainPageGrids;
+using System.Configuration;
 
 namespace HomeDriveDesktop {
     public partial class FormMain : Window {
@@ -50,5 +52,14 @@ namespace HomeDriveDesktop {
             mainPage = null;
         }
         #endregion
+
+        private void FormMain_ResizeBegin(object sender, EventArgs e) {
+            panelMain.SuspendLayout();
+        }
+
+        private void FormMain_ResizeEnd(object sender, EventArgs e) {
+            panelMain.ResumeLayout(true);
+            panelMain.PerformLayout();
+        }
     }
 }

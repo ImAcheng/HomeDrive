@@ -43,6 +43,7 @@
             input1.Size = new Size(549, 60);
             input1.TabIndex = 1;
             input1.TextChanged += input1_TextChanged;
+            input1.KeyDown += input1_KeyDown;
             // 
             // panel1
             // 

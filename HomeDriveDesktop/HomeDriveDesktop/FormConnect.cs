@@ -7,7 +7,10 @@ namespace HomeDriveDesktop {
             InitializeComponent();
         }
 
-        private static readonly string _ConnPropPath = Path.Combine(Application.CommonAppDataPath, "ConnHistory.txt");
+        private static readonly string _ConnPropPath = 
+            Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData), 
+            "ConnHistory.txt");
         private List<string> _ConnHistory;
 
         private void FormConnect_Load(object sender, EventArgs e) {
@@ -42,12 +45,11 @@ namespace HomeDriveDesktop {
                 if (!File.Exists(_ConnPropPath))
                     File.Create(_ConnPropPath).Close();
                 File.WriteAllText(_ConnPropPath, string.Join("\n", _ConnHistory));
-
-                FormMain.ApiClient.BaseAddress = new Uri($"http://{ip_port}");
-                Notification.success(FormMain.Instance, "Home Drive", "Connected!", autoClose: 3);
             }
             catch { }
 
+            FormMain.ApiClient.BaseAddress = new Uri($"http://{ip_port}");
+            Notification.success(FormMain.Instance, "Home Drive", "Connected!", autoClose: 3);
             DialogResult = DialogResult.OK;
         }
 

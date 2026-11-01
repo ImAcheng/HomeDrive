@@ -1,5 +1,6 @@
 ﻿using AntdUI;
 using HomeDriveDesktop.DataModel;
+using HomeDriveDesktop.Helpers;
 using HomeDriveDesktop.MainPageGrids;
 using Polly;
 using System.Diagnostics;
@@ -28,7 +29,6 @@ namespace HomeDriveDesktop {
         /// Select files and upload them one by one (to prevent one failed all failed problem).
         /// </summary>
         /// <param name="parentId"></param>
-        /// <returns></returns>
         public static async Task<bool> UploadFile(Guid? parentId) {
             if (AccountAPI.IsNull()) return false;
 
@@ -41,11 +41,11 @@ namespace HomeDriveDesktop {
             var filePaths = ofd.FileNames;
             bool atLeastOneFileWasUploaded = false;
 
-            DriveDisplayer.Instance.UploadDisplay.Show();
+            DriveDisplayer.Instance.UploadDisplay?.Show(FormMain.Instance);
 
             foreach (string fp in filePaths) {
                 var upb = new UploadProgressBar(fp);
-                DriveDisplayer.Instance.UploadDisplay.AddBar(upb);
+                DriveDisplayer.Instance.UploadDisplay?.AddBar(upb);
 
                 var policy = await Policy.Handle<HttpRequestException>()
                 .OrResult<bool>(rs => !rs)
@@ -93,7 +93,8 @@ namespace HomeDriveDesktop {
             var resp = await FormMain.ApiClient.PostAsync($"api/filedir/delete/{FormMain.LoggedAccount.AccountId}/{targetId}", null);
 
             if (!resp.IsSuccessStatusCode) {
-                MessageBox.Show($"Failed to delete.\nReason: {await resp.Content.ReadAsStringAsync()}");
+                HDMsgBox.Show(FormMain.Instance, $"Something went wrong in backend while deleting.", TType.Warn);
+                Debug.WriteLine($"[Error] {await resp.Content.ReadAsStringAsync()}");
             }
         }
 

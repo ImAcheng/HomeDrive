@@ -58,6 +58,8 @@
             Name = "FormMain";
             Text = "Home Drive";
             Load += FormMain_Load;
+            ResizeBegin += FormMain_ResizeBegin;
+            ResizeEnd += FormMain_ResizeEnd;
             ResumeLayout(false);
         }
 

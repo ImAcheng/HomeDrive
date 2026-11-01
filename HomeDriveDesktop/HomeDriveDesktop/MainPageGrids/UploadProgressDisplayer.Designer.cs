@@ -68,11 +68,10 @@
             ClientSize = new Size(300, 180);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Dark = true;
             Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4);
-            Mode = AntdUI.TAMode.Dark;
+            Mode = AntdUI.TAMode.Light;
             Name = "UploadProgressDisplayer";
             Resizable = false;
             StartPosition = FormStartPosition.Manual;
